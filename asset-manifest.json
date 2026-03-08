@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/san-diego/static/css/main.2069430c.css",
+    "main.js": "/san-diego/static/js/main.ba1d1b3a.js",
+    "static/js/453.d54d06e4.chunk.js": "/san-diego/static/js/453.d54d06e4.chunk.js",
+    "index.html": "/san-diego/index.html",
+    "main.2069430c.css.map": "/san-diego/static/css/main.2069430c.css.map",
+    "main.ba1d1b3a.js.map": "/san-diego/static/js/main.ba1d1b3a.js.map",
+    "453.d54d06e4.chunk.js.map": "/san-diego/static/js/453.d54d06e4.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2069430c.css",
+    "static/js/main.ba1d1b3a.js"
+  ]
+}
