@@ -1,0 +1,18 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  min-width: 308px;
+  min-height: 100vh;
+}
+
+.bodyContainer {
+  padding: 36px;
+  flex-grow: 1;
+  @media (max-width: 1199px) and (min-width: 900px) {
+        padding: 36px 24px;
+    };
+  @media (max-width: 899px) {
+        padding: 12px;
+    };
+}
