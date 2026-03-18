@@ -1,15 +1,23 @@
 {
   "files": {
-    "main.css": "/san-diego/static/css/main.7b2c71a7.css",
-    "main.js": "/san-diego/static/js/main.f9b6b489.js",
+    "main.css": "/san-diego/static/css/main.f88c9f1a.css",
+    "main.js": "/san-diego/static/js/main.7798033f.js",
     "static/js/453.d54d06e4.chunk.js": "/san-diego/static/js/453.d54d06e4.chunk.js",
+    "static/media/figtree-latin-700-normal.woff": "/san-diego/static/media/figtree-latin-700-normal.5815fb803fff84fd982b.woff",
+    "static/media/figtree-latin-400-normal.woff": "/san-diego/static/media/figtree-latin-400-normal.5cbfa1293ba6675e2dd5.woff",
+    "static/media/figtree-latin-400-normal.woff2": "/san-diego/static/media/figtree-latin-400-normal.28d8df97d9b4bd55e4fc.woff2",
+    "static/media/figtree-latin-700-normal.woff2": "/san-diego/static/media/figtree-latin-700-normal.e59bc5f6400f0d18747b.woff2",
+    "static/media/figtree-latin-ext-700-normal.woff": "/san-diego/static/media/figtree-latin-ext-700-normal.8b1d2aa9499f26569dd7.woff",
+    "static/media/figtree-latin-ext-400-normal.woff": "/san-diego/static/media/figtree-latin-ext-400-normal.2fc519dbc7ca3a882132.woff",
+    "static/media/figtree-latin-ext-400-normal.woff2": "/san-diego/static/media/figtree-latin-ext-400-normal.868ced668fae732a38c4.woff2",
+    "static/media/figtree-latin-ext-700-normal.woff2": "/san-diego/static/media/figtree-latin-ext-700-normal.b1e4551b58505e60b640.woff2",
     "index.html": "/san-diego/index.html",
-    "main.7b2c71a7.css.map": "/san-diego/static/css/main.7b2c71a7.css.map",
-    "main.f9b6b489.js.map": "/san-diego/static/js/main.f9b6b489.js.map",
+    "main.f88c9f1a.css.map": "/san-diego/static/css/main.f88c9f1a.css.map",
+    "main.7798033f.js.map": "/san-diego/static/js/main.7798033f.js.map",
     "453.d54d06e4.chunk.js.map": "/san-diego/static/js/453.d54d06e4.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.7b2c71a7.css",
-    "static/js/main.f9b6b489.js"
+    "static/css/main.f88c9f1a.css",
+    "static/js/main.7798033f.js"
   ]
 }
