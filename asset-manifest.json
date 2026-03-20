@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/san-diego/static/css/main.2b5bc527.css",
-    "main.js": "/san-diego/static/js/main.7e10a3c6.js",
+    "main.js": "/san-diego/static/js/main.207593f2.js",
     "static/js/453.d54d06e4.chunk.js": "/san-diego/static/js/453.d54d06e4.chunk.js",
     "static/media/figtree-latin-700-normal.woff": "/san-diego/static/media/figtree-latin-700-normal.5815fb803fff84fd982b.woff",
     "static/media/figtree-latin-400-normal.woff": "/san-diego/static/media/figtree-latin-400-normal.5cbfa1293ba6675e2dd5.woff",
@@ -13,11 +13,11 @@
     "static/media/figtree-latin-ext-700-normal.woff2": "/san-diego/static/media/figtree-latin-ext-700-normal.b1e4551b58505e60b640.woff2",
     "index.html": "/san-diego/index.html",
     "main.2b5bc527.css.map": "/san-diego/static/css/main.2b5bc527.css.map",
-    "main.7e10a3c6.js.map": "/san-diego/static/js/main.7e10a3c6.js.map",
+    "main.207593f2.js.map": "/san-diego/static/js/main.207593f2.js.map",
     "453.d54d06e4.chunk.js.map": "/san-diego/static/js/453.d54d06e4.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.2b5bc527.css",
-    "static/js/main.7e10a3c6.js"
+    "static/js/main.207593f2.js"
   ]
 }
