@@ -1,0 +1,58 @@
+.articleCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 300px;
+    border-radius: 12px !important;
+    @media (max-width: 899px) {
+        height: 400px;
+    }
+}
+
+.resourceCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 300px;
+    border-radius: 12px !important;
+    @media (max-width: 899px) {
+        height: 400px;
+    }
+}
+
+.hotlineCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 450px;
+    border-radius: 12px !important;
+    @media (max-width: 899px) {
+        height: 500px;
+    }
+}
+
+.modalCard {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-width: 500px;
+    height: 400px;
+    border-radius: 12px !important;
+    @media (max-width: 599px) {
+        max-width: none;
+        width: stretch;
+        height: 100%;
+        border-radius: 0px !important;
+    }
+}
+
+.posterImage {
+    aspect-ratio: 22/17;
+    align-content: center;
+    @media (max-width: 899px) {
+        max-height: 300px;
+    }
+}

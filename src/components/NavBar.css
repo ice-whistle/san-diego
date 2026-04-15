@@ -1,0 +1,18 @@
+.navBarContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    width: 100%;
+    margin-bottom: 24px;
+    justify-content: center;
+}
+
+.navBarHomeLogo {
+    display: flex;
+    flex-direction: column;
+    margin: 24px 0px;
+}
+
+.navBarHomeLogo:hover {
+    cursor: pointer;
+}
