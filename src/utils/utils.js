@@ -1,0 +1,68 @@
+import L  from 'leaflet';
+export const severityLevel = [
+    "error",
+    "warning",
+    "info",
+    "info",
+    "success"
+]
+
+export const severityTitleEN = [
+    "Confirmed ICE Alert",
+    "ICE Sighting",
+    "Unconfirmed Sighting",
+    "Prior Sighting",
+    "Mutual Aid"
+]
+
+export const severityTitleES = [
+    "Alerta de ICE Confirmada",
+    "Avistamiento de ICE",
+    "Avistamiento No Confirmado",
+    "Avistamiento Previo",
+    "Ayuda Mutua"
+]
+
+const redIcon = new L.Icon({
+    iconUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png",
+    shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png",
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+});
+
+const yellowIcon = new L.Icon({
+    iconUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-yellow.png",
+    shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png",
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+});
+
+const blueIcon = new L.Icon({
+    iconUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png",
+    shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png",
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+});
+
+const greenIcon = new L.Icon({
+    iconUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png",
+    shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png",
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+});
+
+export const severityIcon = [
+    redIcon,
+    yellowIcon,
+    blueIcon,
+    blueIcon,
+    greenIcon
+]
