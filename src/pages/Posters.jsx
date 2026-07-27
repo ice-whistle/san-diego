@@ -7,7 +7,8 @@ import {
     ICEWhistlePoster3,
     ICEWhistlePoster4,
     ICEWhistlePoster5,
-    ICEWhistlePoster6
+    ICEWhistlePoster6,
+    ICEWhistlePoster7
 } from '../assets/images'
 import {
     ICEWhistlePosterPDF1,
@@ -15,7 +16,8 @@ import {
     ICEWhistlePosterPDF3,
     ICEWhistlePosterPDF4,
     ICEWhistlePosterPDF5,
-    ICEWhistlePosterPDF6
+    ICEWhistlePosterPDF6,
+    ICEWhistlePosterPDF7
 } from '../assets/documents'
 
 export const Posters = ({language, setFocusedCenter, setFocusedZoom, setFocusedAlertId}) =>{
@@ -24,6 +26,14 @@ export const Posters = ({language, setFocusedCenter, setFocusedZoom, setFocusedA
   setFocusedAlertId(null);
 
   const accordionDetails = [
+    {
+      titleEN: '¡Aquí estamos, y no nos vamos!',
+      titleES: '¡Aquí estamos, y no nos vamos!',
+      image: ICEWhistlePoster7,
+      buttonLabelEN: 'Download PDF',
+      buttonLabelES: 'Descargar PDF',
+      link: ICEWhistlePosterPDF7
+    },
     {
       chipEN: 'Monarch Butterfly Series',
       chipES: 'Serie de la Mariposa Monarca',

@@ -4,6 +4,7 @@ import ICEWhistlePosterPDF3 from './ICE_Whistle_Posters_8.5x11_Part3.pdf';
 import ICEWhistlePosterPDF4 from './ICE_Whistle_Posters_8.5x11_Part4.pdf';
 import ICEWhistlePosterPDF5 from './ICE_Whistle_Posters_8.5x11_Part5.pdf';
 import ICEWhistlePosterPDF6 from './ICE_Whistle_Posters_8.5x11_Part6.pdf';
+import ICEWhistlePosterPDF7 from './ICE_Whistle_Posters_8.5x11_Part7.pdf';
 import FrontOfficeFlowchartPDF from './FrontOfficeFlowchart.pdf';
 import StudentFlowchartPDF from './StudentFlowchart.pdf';
 import StudentInformationRequestFlowchartPDF from './StudentInformationRequestFlowchart.pdf';
@@ -20,6 +21,7 @@ export {
     ICEWhistlePosterPDF4,
     ICEWhistlePosterPDF5,
     ICEWhistlePosterPDF6,
+    ICEWhistlePosterPDF7,
     FrontOfficeFlowchartPDF,
     StudentFlowchartPDF,
     StudentInformationRequestFlowchartPDF,

@@ -12,7 +12,7 @@ export const Poster = ({accordionDetail, language}) =>{
     img.onload = () => setImageLoading(false);
     }, [accordionDetail.image]);
   return (
-    <Card elevation={3} sx={{borderRadius: '12px'}} >
+    <Card elevation={3} sx={{borderRadius: '12px', height: 'stretch'}} >
         {imageLoading && <div className='posterImage'>
             <CircularProgress />
         </div>}
@@ -23,7 +23,8 @@ export const Poster = ({accordionDetail, language}) =>{
             alt="Paella dish"
         />}
         <CardContent sx={{display: 'flex', flexDirection: 'column', gap: '8px'}}>
-            <div style={{display: 'flex'}}><Chip sx={{backgroundColor: theme.palette.primary.extraLight}} label={language === 'EN' ? accordionDetail.chipEN : accordionDetail.chipES}/></div>
+            {accordionDetail.chipEN && <div style={{display: 'flex'}}><Chip sx={{backgroundColor: theme.palette.primary.extraLight}} label={language === 'EN' ? accordionDetail.chipEN : accordionDetail.chipES}/></div>}
+            {!accordionDetail.chipEN && <div style={{height: '32px'}}/>}
             <Typography variant='h6' sx={{textAlign: 'left', fontWeight: 'bold'}}>{language === 'EN' ? accordionDetail.titleEN : accordionDetail.titleES}</Typography>
         </CardContent>
         <CardActions sx={{display: 'flex', padding: '0 16px 16px 16px'}}>
