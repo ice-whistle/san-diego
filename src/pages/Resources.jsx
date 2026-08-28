@@ -82,8 +82,8 @@ export const Resources = ({language, setFocusedCenter, setFocusedZoom, setFocuse
     <div className='pageContainer'>
         <Typography variant='h4'>{language === 'EN' ? 'Resources' : 'Recursos'}</Typography>
         <Grid container spacing={2}>
-            {resourceDetails.map(resourceDetail => (
-                <Grid size={{lg: 4, md: 6, sm: 12, xs: 12}}><Resource resourceDetail={resourceDetail} language={language} priority='low' className='resourceCard'/></Grid>
+            {resourceDetails.map((resourceDetail, i) => (
+                <Grid key={`resource-${i}`} size={{lg: 4, md: 6, sm: 12, xs: 12}}><Resource resourceDetail={resourceDetail} language={language} priority='low' className='resourceCard'/></Grid>
             ))}
         </Grid>
     </div>

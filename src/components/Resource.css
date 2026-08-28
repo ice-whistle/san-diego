@@ -49,6 +49,24 @@
     }
 }
 
+.reportSightingModalCard {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-width: 500px;
+    height: min-content;
+    border-radius: 12px !important;
+    @media (max-width: 599px) {
+        max-width: none;
+        width: stretch;
+        height: 100%;
+        border-radius: 0px !important;
+    }
+}
+
 .modalCardImage {
     position: absolute;
     inset: 0;
@@ -66,6 +84,43 @@
         height: 100%;
         max-height: unset;
         border-radius: 0px !important;
+    }
+}
+
+.reportSightingModalContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.reportSightingCardContent {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 468px;
+    @media (max-width: 599px) {
+        width: stretch;
+    }
+}
+
+.reportSightingLoading {
+    display: flex;
+    height: stretch;
+    justify-content: center;
+    align-items: center;
+}
+
+.reportSightingCardContentFixedHeight {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 468px;
+    height: 400px;
+    @media (max-width: 599px) {
+        width: stretch;
+        height: stretch;
     }
 }
 

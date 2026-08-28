@@ -1,12 +1,156 @@
 import './Resource.css';
-import { Button, Card, CardContent, CardActions, Modal, Typography } from "@mui/material";
+import { Button, Card, CardContent, CardActions, Modal, Typography, TextField, FormControl, InputLabel, Select, MenuItem, CircularProgress, Tooltip, IconButton } from "@mui/material";
 import { useTheme } from '@mui/material/styles';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import { useState } from 'react';
+import { severityDescriptionEN, severityDescriptionES, severityIcon, severityLevel, severityTitleEN, severityTitleES } from '../utils/utils';
+import { sendSightingReport } from '../utils/getAPIResults';
+
+const ReportSightingModal = ({
+  language, setModal,
+  address, handleAddress,
+  zipCode, handleZipCode,
+  severity, handleSeverityClick,
+  description, handleDescription,
+  isFormValid
+}) => {
+  const [apiResponse, setApiResponse] = useState('Start');
+  const handleSubmitClick = async (address, zipCode, description, severity) => {
+    setApiResponse('Loading');
+    const response = await sendSightingReport(address, zipCode, description, severity);
+    setApiResponse(response);
+  };
+
+  return (
+    <> 
+      {apiResponse === 'Start' ?
+        <div className="reportSightingModalContainer">
+          <CardContent className='reportSightingCardContent'>
+              <Typography color='secondary' variant='h5' sx={{textAlign: 'left', fontWeight: 'bold'}}>{language === 'EN' ? 'Report a sighting' : 'Reportar un avistamiento'}</Typography>
+              <TextField
+                required
+                id="street-address"
+                label={language === 'EN' ? 'Street address' : 'Dirección postal'}
+                placeholder="123 Test St, San Diego, CA"
+                value={address}
+                onChange={handleAddress}
+              />
+              <TextField
+                required
+                id="zip-code"
+                label={language === 'EN' ? 'Zip code' : 'Código postal'}
+                placeholder="92115"
+                value={zipCode}
+                onChange={handleZipCode}
+              />
+              <FormControl fullWidth required>
+                <InputLabel id="demo-simple-select-label">Severity</InputLabel>
+                <Select
+                  id="severity"
+                  value={severity}
+                  label="Severity"
+                  onChange={handleSeverityClick}
+                  sx={{color: `${severityLevel[severity]}.dark`}}
+                >
+                  {severityTitleEN.map((item, i) => (
+                    <MenuItem sx={{color: `${severityLevel[i]}.dark`}} value={i}>
+                      <div className="legendItem" key={i}>
+                          <img src={severityIcon[i].options.iconUrl} alt="" className="legendIcon" />
+                          {language === 'EN' ? severityTitleEN[i] : severityTitleES[i]}
+                          <Tooltip title={language === 'EN' ? severityDescriptionEN[i] : severityDescriptionES[i]}>
+                            <IconButton>
+                              <InfoOutlinedIcon/>
+                            </IconButton>
+                          </Tooltip>
+                      </div>
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+              <TextField
+                required
+                id="outlined-required"
+                label={language === 'EN' ? 'Description' : 'Descripción'}
+                multiline
+                onChange={handleDescription}
+                value={description}
+              />
+          </CardContent>
+          <CardActions sx={{display: 'flex', padding: '16px'}}>
+              <Button color='secondary' onClick={()=>setModal(null)} target="_blank" variant="outlined" size='large' sx={{width: '100%', height: '100%'}}>{language === 'EN' ? 'Cancel' : 'Cancele'}</Button>
+              <Button color='secondary' disabled={!isFormValid} target="_blank" onClick={()=>{handleSubmitClick(address, zipCode, description, severity, setModal)}} variant="contained" size='large' sx={{width: '100%', minWidth: 'auto', whiteSpace: 'nowrap'}}>{language === 'EN' ? 'Submit sighting' : 'Enviar avistamiento'}</Button>
+          </CardActions>
+        </div> :
+      apiResponse === 'Loading' ?
+        <div className="reportSightingModalContainer">
+          <CardContent className='reportSightingCardContentFixedHeight'>
+              <Typography color='secondary' variant='h5' sx={{textAlign: 'left', fontWeight: 'bold'}}>{language === 'EN' ? 'Report a sighting' : 'Reportar un avistamiento'}</Typography>
+              <div className='reportSightingLoading'>
+                  <CircularProgress />
+              </div>
+          </CardContent>
+          <CardActions sx={{display: 'flex', padding: '16px'}}>
+              <Button disabled target="_blank" variant="outlined" size='large' sx={{width: '100%', height: '100%'}}>{language === 'EN' ? 'Cancel' : 'Cancele'}</Button>
+              <Button disabled target="_blank" variant="contained" size='large' sx={{width: '100%', minWidth: 'auto', whiteSpace: 'nowrap'}}>{language === 'EN' ? 'Submit sighting' : 'Enviar avistamiento'}</Button>
+          </CardActions>
+        </div>:
+      apiResponse === 'Success' ?
+        <div className="reportSightingModalContainer">
+          <CardContent className='reportSightingCardContentFixedHeight'>
+              <Typography variant='h5' sx={{textAlign: 'left', fontWeight: 'bold'}}>{language === 'EN' ? 'Thank you for submitting a sighting.' : 'Gracias por enviar un avistamiento.'}</Typography>
+          </CardContent>
+          <CardActions sx={{display: 'flex', padding: '16px'}}>
+              <Button onClick={()=>setModal(null)} target="_blank" variant="contained" size='large' sx={{width: '100%', height: '100%'}}>{language === 'EN' ? 'Close' : 'Cerrar'}</Button>
+          </CardActions>
+        </div>:
+      apiResponse === 'ErrorZipCode' ?
+        <div className="reportSightingModalContainer">
+          <CardContent className='reportSightingCardContentFixedHeight'>
+              <Typography color='secondary' variant='h5' sx={{textAlign: 'left', fontWeight: 'bold'}}>{language === 'EN' ? `The zipcode ${zipCode} was not found. Please try again.` : `No se encontró el código postal ${zipCode}. Por favor, inténtelo de nuevo.`}</Typography>
+          </CardContent>
+          <CardActions sx={{display: 'flex', padding: '16px'}}>
+              <Button color='secondary' onClick={()=>setModal(null)} target="_blank" variant="outlined" size='large' sx={{width: '100%', height: '100%'}}>{language === 'EN' ? 'Cancel' : 'Cancele'}</Button>
+              <Button color='secondary' target="_blank" onClick={()=>{setApiResponse('Start')}} variant="contained" size='large' sx={{width: '100%', minWidth: 'auto', whiteSpace: 'nowrap'}}>{language === 'EN' ? 'Submit a new sighting' : 'Enviar un nuevo avistamiento'}</Button>
+          </CardActions>
+        </div>:
+      <div className="reportSightingModalContainer">
+          <CardContent className='reportSightingCardContentFixedHeight'>
+              <Typography color='secondary' variant='h5' sx={{textAlign: 'left', fontWeight: 'bold'}}>{language === 'EN' ? 'Something went wrong. Please try again later.' : 'Algo salió mal. Por favor, inténtalo de nuevo más tarde.'}</Typography>
+          </CardContent>
+          <CardActions sx={{display: 'flex', padding: '16px'}}>
+              <Button color='secondary' onClick={()=>setModal(null)} target="_blank" variant="contained" size='large' sx={{width: '100%', height: '100%'}}>{language === 'EN' ? 'Close' : 'Cerrar'}</Button>
+          </CardActions>
+        </div>
+      }
+  </>);
+};
 
 export const FullModal = ({modal, setModal, language, setModalContent, modalContent}) =>{
   const theme = useTheme();
   let index = 0;
   let priority = 'low';
+  const [severity, setSeverity] = useState(2);
+  const [address, setAddress] = useState('');
+  const [zipCode, setZipCode] = useState('');
+  const [description, setDescription] = useState('');
+  const handleSeverityClick = (event) => {
+    setSeverity(event.target.value);
+  };
+
+  const handleAddress = (event) => {
+    setAddress(event.target.value);
+  };
+
+  const handleZipCode = (event) => {
+    setZipCode(event.target.value);
+  };
+
+  const handleDescription = (event) => {
+    setDescription(event.target.value);
+  };
+
+  const isFormValid = address.trim() !== '' && zipCode.trim() !== '' && description.trim() !== '';
 
   switch (modal) {
     case 'callEmergency':
@@ -36,6 +180,9 @@ export const FullModal = ({modal, setModal, language, setModalContent, modalCont
     case 'JFSSD':
         index = 6;
         priority = 'high';
+        break;
+    case 'reportSighting':
+        index = 7;
         break;
     default:
         break;
@@ -142,7 +289,19 @@ export const FullModal = ({modal, setModal, language, setModalContent, modalCont
       link1EN: 'tel:+8586373365',
       link1ES: 'tel:+8586373365',
     },
-  ]
+    {
+      titleEN: 'Do you want to report a sighting?',
+      titleES: '¿Quieres llamar a JFSSD?',
+      buttonLabel1EN: 'Submit sighting',
+      buttonLabel1ES: 'Llame',
+      buttonLabel2EN: 'Cancel',
+      buttonLabel2ES: 'Cancele',
+      link1EN: 'tel:+8586373365',
+      link1ES: 'tel:+8586373365',
+    },
+  ];
+
+  
     
   return (
     <Modal
@@ -151,7 +310,23 @@ export const FullModal = ({modal, setModal, language, setModalContent, modalCont
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
         >
-        {!modalContent ?
+        {modal === 'reportSighting' ?
+          (<Card elevation={3} className='reportSightingModalCard'>
+            <ReportSightingModal
+              language={language}
+              setModal={setModal}
+              address={address}
+              handleAddress={handleAddress}
+              zipCode={zipCode}
+              handleZipCode={handleZipCode}
+              severity={severity}
+              handleSeverityClick={handleSeverityClick}
+              description={description}
+              handleDescription={handleDescription}
+              isFormValid={isFormValid}
+            />
+          </Card>):
+        !modalContent ?
           <Card elevation={3} className='modalCard'>
               {(modalDetail[index].titleEN || modalDetail[index].detailsEN) && <CardContent sx={{display: 'flex', flexDirection: 'column', gap: '16px'}}>
                   {modalDetail[index].titleEN && <Typography variant='h5' sx={{textAlign: 'left', fontWeight: 'bold', color: color.main}}>{language === 'EN' ? modalDetail[index].titleEN : modalDetail[index].titleES}</Typography>}

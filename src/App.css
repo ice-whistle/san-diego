@@ -7,14 +7,23 @@
 }
 
 .bodyContainer {
+  position: relative;
   display: flex;
   justify-content: center;
-  padding: 36px;
+  padding: 36px 24px;
   flex-grow: 1;
-  @media (max-width: 1199px) and (min-width: 900px) {
-        padding: 36px 24px;
-    };
   @media (max-width: 899px) {
-        padding: 12px;
-    };
+    padding: 12px;
+  };
+}
+
+.createNewSighting {
+  position: absolute !important;
+  right: 24px;
+  bottom: 24px;
+  @media (max-width: 899px) {
+    position: fixed !important;
+    right: 12px;
+    bottom: 12px;
+  };
 }

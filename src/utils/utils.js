@@ -15,12 +15,28 @@ export const severityTitleEN = [
     "Mutual Aid"
 ]
 
+export const severityDescriptionEN = [
+    "There is confirmed ICE activity at this location and the situation is urgent. Those who can come help support and document are urged to show up. Those who are at-risk should shelter in place.",
+    "ICE is in the area. ICE agents or vehicles may have been spotted. If you are in the area be aware and stay vigilant.",
+    "You saw something worth reporting, but there isn't enough information to verify the report yet.",
+    "Something happened in this location either earlier today, or prior to today, and the incident was reported to notify people of recent activity in the area.",
+    "Mutual Aid"
+]
+
 export const severityTitleES = [
     "Alerta de ICE Confirmada",
     "Avistamiento de ICE",
     "Avistamiento No Confirmado",
     "Avistamiento Previo",
     "Ayuda Mutua"
+]
+
+export const severityDescriptionES = [
+    "Se ha confirmado actividad de ICE en esta ubicación y la situación es urgente. Se insta a quienes puedan acudir para brindar apoyo y documentar los hechos a que se presenten. Aquellas personas en situación de riesgo deben permanecer a resguardo.",
+    "ICE se encuentra en la zona. Es posible que se hayan visto agentes o vehículos de ICE. Si se encuentra en el área, manténgase alerta y vigilante.",
+    "Ha visto algo que merece ser reportado, pero aún no hay información suficiente para verificar el reporte.",
+    "Ha ocurrido algo en esta ubicación, ya sea hoy mismo o con anterioridad, y se ha reportado el incidente para informar a las personas sobre la actividad reciente en la zona.",
+    "Ayuda mutua"
 ]
 
 const redIcon = new L.Icon({

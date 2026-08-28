@@ -65,6 +65,30 @@ export function getfilteredAlertAPIResponse(setAlerts, setAlertsLoading) {
   runPostRequest();
 }
 
+export async function sendSightingReport(address, zipCode, description, severity) {
+  try {
+    const response = await fetch(
+      `https://broad-bar-e989.incognito-activist-us.workers.dev/?address=${encodeURIComponent(address)}&zipCode=${encodeURIComponent(zipCode)}&description=${encodeURIComponent(description)}&severity=${encodeURIComponent(severity)}`
+    );
+    const text = await response.text();
+
+    const data = JSON.parse(text);
+    if (data.error) {
+      console.error('Something went wrong: ', data.error);
+      if (data.error.includes('The specified zipcode')) {
+        return 'ErrorZipCode';
+      }
+      else return 'Error'
+    }
+
+    console.log("Alert submitted successfully.");
+    return 'Success';
+  } catch (err) {
+    console.error("Something went wrong: ", err);
+    return 'Error';
+  }
+}
+
 export function getAlertsEveryHour(setAlerts, setAlertsLoading) {
   setInterval(()=> {
     getfilteredAlertAPIResponse(setAlerts, setAlertsLoading);

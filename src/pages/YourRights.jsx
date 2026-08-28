@@ -120,8 +120,8 @@ export const YourRights = ({language, setFocusedCenter, setFocusedZoom, setFocus
     <div className='pageContainer'>
         <Typography variant='h4'>{language === 'EN' ? 'Your Rights' : 'Sus derechos'}</Typography>
         <Grid container spacing={2}>
-            {library.map(article => (
-                <Grid size={{lg: 4, md: 6, sm: 12, xs: 12}}><Resource resourceDetail={article} language={language} className='articleCard'/></Grid>
+            {library.map((article, i) => (
+                <Grid key={`article-${i}`} size={{lg: 4, md: 6, sm: 12, xs: 12}}><Resource resourceDetail={article} language={language} className='articleCard'/></Grid>
             ))}
         </Grid>
     </div>

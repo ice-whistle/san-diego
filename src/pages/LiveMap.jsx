@@ -1,10 +1,10 @@
 import './Pages.css';
-import { Alert, CircularProgress, Grid, Typography, Button, Modal, Box } from '@mui/material';
+import { CircularProgress, Grid, Typography, Button } from '@mui/material';
 import { SimpleMap } from '../components/Map.jsx';
 import { useScreenResolution } from '../utils/ScreenSize.tsx';
 import { AlertList } from '../components/AlertList.jsx';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
-import { useState } from 'react';
+import { useRef } from 'react';
 
 export const LiveMap = ({
           language,
@@ -21,8 +21,12 @@ export const LiveMap = ({
         }) =>{
 
   const { isXSmall, isSmall } = useScreenResolution();
+  const mapRef = useRef(null);
 
   const handleClickAlert = (alert) => {
+    if ((isXSmall || isSmall) && mapRef.current) {
+      mapRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
     setFocusedCenter([Number(alert.lat), Number(alert.long)]);
     setFocusedZoom(12);
     setFocusedAlertId(alert.id);
@@ -35,17 +39,11 @@ export const LiveMap = ({
         {alertsLoading && <div>
             <CircularProgress />
           </div>}
-        {!alertsLoading && <Alert variant='outlined' severity='info' >
-          <Typography variant='subtitle2' sx={{display: 'flex', textAlign: 'left'}}>
-            {language === 'EN' ?
-              'This is a list of community reported ICE sightings within the greater San Diego area from the last 7 days. Please note that this is not an exhaustive list and that there may be more sightings not reported. Map data is sourced from StopICE.net.':
-              'Esta es una lista de avistamientos de ICE reportados por la comunidad dentro del área metropolitana de San Diego durante los últimos 7 días. Tenga en cuenta que esta no es una lista exhaustiva y que podría haber más avistamientos que no han sido reportados. Los datos del mapa provienen de StopICE.net.'}
-          </Typography>
-        </Alert>}
-        {!alertsLoading && <Grid container spacing={2}>
+        {!alertsLoading && <Grid container spacing={2} sx={{height: {md: '70vh'}}}>
           {(isSmall || isXSmall) &&
-            <Grid size={12}>
+            <Grid size={12} ref={mapRef}>
               <SimpleMap
+                mapRef={mapRef}
                 language={language}
                 alerts={alerts}
                 focusedCenter={focusedCenter}

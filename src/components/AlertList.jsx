@@ -45,8 +45,8 @@ export const AlertList = ({
                     </div>}
                     {!imageLoading &&
                     <div className="imageContainer">
-                        {imageSources.map(imageSource => (
-                        <Box component="img" className="image" alt={`${title} image`} src={imageSource}/>
+                        {imageSources.map((imageSource, i) => (
+                        <Box key={`image-${i}`} component="img" className="image" alt={`${title} image`} src={imageSource}/>
                         ))}
                     </div>}
                 </CardContent>
@@ -58,7 +58,7 @@ export const AlertList = ({
     }
 
   return (
-    <Grid size={{lg: 4, md: 4, sm: 12, xs: 12}} sx={{maxHeight: '60vh'}}>
+    <Grid size={{lg: 4, md: 4, sm: 12, xs: 12}} sx={{height: {md: '100%'}}}>
         <Card elevation={3} sx={{height: '100%', overflowY: 'scroll'}}>
             <CardContent>
                 {alerts.length === 0 && <Alert severity='info'>
@@ -66,9 +66,9 @@ export const AlertList = ({
                     There have been no sightings in the last 7 days.
                 </Alert>}
                 <Grid container spacing={2}>
-                    {alerts.map(alert => (
-                    <Grid size={12}>
-                        <CardActionArea id='one' onClick={()=>handleClickAlert(alert)} sx={{width: 'stretch'}}>
+                    {alerts.map((alert, i) => (
+                    <Grid size={12} key={`alert-${i}`}>
+                        <CardActionArea id='one' component="div" onClick={()=>handleClickAlert(alert)} sx={{width: 'stretch'}}>
                             <Alert id='two' severity={severityLevel[alert.priority - 1]} variant={alert.id === focusedAlertId ? 'filled' : 'standard'} sx={{"& .MuiAlert-message": {width: '100%'}}}>
                                 <AlertTitle id='three' sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: 'stretch'}}>
                                     <Typography variant='body1' sx={{textAlign: 'left', fontWeight: 'bold'}} color={alert.id === focusedAlertId ? 'white' : `${severityLevel[alert.priority - 1]}.dark`}>
@@ -82,7 +82,7 @@ export const AlertList = ({
                                 <Divider sx={{marginTop: '8px', marginBottom: '8px', width: 'stretch'}}/>
                                 <Typography variant='subtitle2' sx={{display: 'flex', textAlign: 'left', fontWeight: 'bold', width: 'stretch'}}>{alert.address.toUpperCase()}</Typography>
                                 <Typography variant='subtitle2' sx={{display: 'flex', textAlign: 'left', width: 'stretch'}}>{alert.description}</Typography>
-                                {alert.media && <Button variant="contained" sx={{marginTop: '12px', width: 'stretch', backgroundColor: `${severityLevel[alert.priority - 1]}.light`}} onClick={()=>{setModal('viewImages'); setModalContent(<ImageModal title={alert.address.toUpperCase()} src={alert.media} setModal={setModal} language={language} color={`${severityLevel[alert.priority - 1]}.dark`}/>)}}>View image</Button>}
+                                {alert.media && <Button variant="contained" sx={{marginTop: '12px', width: 'stretch', backgroundColor: `${severityLevel[alert.priority - 1]}.light`}} onClick={()=>{setModal('viewImages'); setModalContent(<ImageModal title={alert.address.toUpperCase()} src={alert.media} setModal={setModal} language={language} color={`${severityLevel[alert.priority - 1]}.dark`}/>)}}>{language === 'EN' ? 'View image' : 'Ver imagen'}</Button>}
                             </Alert>
                         </CardActionArea>
                     </Grid>

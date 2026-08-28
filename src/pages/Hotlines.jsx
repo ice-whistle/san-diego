@@ -92,8 +92,8 @@ export const Hotlines = ({language, setFocusedCenter, setFocusedZoom, setFocused
     <div className='pageContainer'>
         <Typography variant='h4' color='secondary'>{language === 'EN' ? 'Hotlines' : 'Líneas de ayuda'}</Typography>
         <Grid container spacing={2}>
-            {hotlineDetails.map(hotlineDetail => (
-                <Grid size={{lg: 4, md: 6, sm: 12, xs: 12}}><Resource resourceDetail={hotlineDetail} language={language} priority='high' className='hotlineCard'/></Grid>
+            {hotlineDetails.map((hotlineDetail, i) => (
+                <Grid key={`hotline-${i}`} size={{lg: 4, md: 6, sm: 12, xs: 12}}><Resource resourceDetail={hotlineDetail} language={language} priority='high' className='hotlineCard'/></Grid>
             ))}
         </Grid>
     </div>
