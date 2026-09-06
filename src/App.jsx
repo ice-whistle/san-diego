@@ -4,7 +4,7 @@ import { NavBar } from './components/NavBar.jsx';
 import { YourRights } from './pages/YourRights.jsx';
 import { LiveMap } from './pages/LiveMap.jsx';
 import { Resources } from './pages/Resources.jsx';
-import { getAlertsEveryHour, getfilteredAlertAPIResponse } from './utils/getAPIResults';
+import { getAlertsEveryHour, getCameraAPIResponse, getfilteredAlertAPIResponse } from './utils/getAPIResults';
 import { Footer } from './components/Footer.jsx';
 import { Posters } from './pages/Posters.jsx';
 import { IdentifyingICEVehicles } from './pages/IdentifyingICEVehicles.jsx';
@@ -20,6 +20,8 @@ function App() {
   const [language, setLanguage] = useState('EN');
   const [alerts, setAlerts] = useState([]);
   const [alertsLoading, setAlertsLoading] = useState(true);
+  const [cameras, setCameras] = useState([]);
+  const [camerasLoading, setCamerasLoading] = useState(true);
   const [modal, setModal] = useState(null);
   const [modalContent, setModalContent] = useState(null);
   const [focusedCenter, setFocusedCenter] = useState(null);
@@ -33,6 +35,7 @@ function App() {
     if (hasFetched.current) return;
     hasFetched.current = true;
     getfilteredAlertAPIResponse(setAlerts, setAlertsLoading);
+    getCameraAPIResponse(setCameras, setCamerasLoading);
   }, []);
 
   // getAlertsEveryHour(setAlerts, setAlertsLoading);
@@ -54,6 +57,8 @@ function App() {
             language={language}
             alerts={alerts}
             alertsLoading={alertsLoading}
+            cameras={cameras}
+            camerasLoading={camerasLoading}
             setFocusedCenter={setFocusedCenter}
             focusedCenter={focusedCenter}
             setFocusedZoom={setFocusedZoom}

@@ -23,6 +23,18 @@ export function getAlertsWithinWeek(obj) {
     });
 }
 
+export function getFlockCameras(obj) {
+  const flockCameras = obj.elements.filter(element => {
+     const tags = element.tags || {};
+     return (
+       tags.brand?.toLowerCase().includes("flock") ||
+       tags.manufacturer?.toLowerCase().includes("flock") ||
+       tags.name?.toLowerCase().includes("flock")
+     );
+   });
+  return flockCameras;
+}
+
 export function getfilteredAlertAPIResponse(setAlerts, setAlertsLoading) {
   const runPostRequest = async () => {
       setAlertsLoading(true);
@@ -51,7 +63,7 @@ export function getfilteredAlertAPIResponse(setAlerts, setAlertsLoading) {
           return;
         }
         catch (repairError) {
-          console.error("Repair failed:", repairError.message);
+          console.error("Repair failed:", repairError);
         }
         finally {
           setAlertsLoading(false);
@@ -87,6 +99,34 @@ export async function sendSightingReport(address, zipCode, description, severity
     console.error("Something went wrong: ", err);
     return 'Error';
   }
+}
+
+export function getCameraAPIResponse(setCameras, setCamerasLoading) {
+  const runRequest = async () => {
+    setCamerasLoading(true);
+    try {
+      const response = await fetch(
+        `https://plain-silence-0fb8.incognito-activist-us.workers.dev/`
+      );
+
+      const text = await response.text();
+      const data = JSON.parse(text);
+
+      if (data.error) {
+        console.error(data.error);
+        setCameras('Error');
+      } else {
+        setCameras(getFlockCameras(data));
+      }
+    } catch (err) {
+      console.error(err);
+      setCameras('Error');
+    } finally {
+      setCamerasLoading(false);
+    }
+  };
+
+  runRequest();
 }
 
 export function getAlertsEveryHour(setAlerts, setAlertsLoading) {

@@ -3,21 +3,19 @@
     width: 100%;
     height: 100%;
     @media (max-width: 899px) {
-        position: unset;
         height: auto;
         aspect-ratio: 1;
     }
 }
 
-.mapInfo {
+.mapToggle {
     position: absolute;
     top: 12px;
+    right: 12px;
     z-index: 1000;
-    margin: 0 12px;
-    @media (max-width: 899px) {
-        position: unset;
-        margin: 0 0 12px 0;
-    }
+    background-color: #ffffff;
+    margin-right: 0 !important;
+    padding: 4px 0 4px 12px;
 }
 
 .mapLegend {
@@ -66,4 +64,12 @@
 
 .legendIcon {
     width: 16px;
+}
+
+.legendCameraIcon {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #ff0000;
+    border: 4px solid #000000
 }

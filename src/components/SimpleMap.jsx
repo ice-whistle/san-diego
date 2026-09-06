@@ -1,14 +1,15 @@
-import './Map.css';
-import { useEffect } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMap, ZoomControl } from 'react-leaflet'
+import './SimpleMap.css';
+import { useEffect, useState } from 'react';
+import { MapContainer, TileLayer, Marker, Popup, useMap, ZoomControl, CircleMarker } from 'react-leaflet'
 import { useScreenResolution } from '../utils/ScreenSize.tsx';
 import { severityDescriptionEN, severityDescriptionES, severityIcon, severityLevel, severityTitleEN, severityTitleES } from '../utils/utils.js';
-import { Alert, Card, IconButton, Tooltip, Typography } from '@mui/material';
+import { Card, IconButton, Tooltip, Typography, Switch, FormControlLabel } from '@mui/material';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 
 export const SimpleMap = ({
     language,
     alerts,
+    cameras,
     focusedCenter,
     focusedZoom,
     handleClickAlert}) =>{
@@ -31,18 +32,32 @@ export const SimpleMap = ({
         return null;
     }
 
-    
+    const [formats, setFormats] = useState(() => []);
+
+    const handleFormat = (event, newFormats) => {
+        setFormats(newFormats);
+    };
+
+    const [flockMapOn, setFlockMapOn] = useState(true);
+
+    const handleFlockToggle = (event) => {
+        setFlockMapOn(event.target.checked);
+    };
     
   return (
     <div className='map'>
-        <Alert variant='filled' severity='info' className='mapInfo'>
-            <Typography variant='subtitle2' sx={{display: 'flex', textAlign: 'left'}}>
-            {language === 'EN' ?
-                'This is a list of community reported ICE sightings within the greater San Diego area from the last 7 days. Please note that this is not an exhaustive list and that there may be more sightings not reported. Map data is sourced from StopICE.net.':
-                'Esta es una lista de avistamientos de ICE reportados por la comunidad dentro del área metropolitana de San Diego durante los últimos 7 días. Tenga en cuenta que esta no es una lista exhaustiva y que podría haber más avistamientos que no han sido reportados. Los datos del mapa provienen de StopICE.net.'}
-            </Typography>
-        </Alert>
-        <MapContainer center={[33.0093, -117.0421]} zoom={9} scrollWheelZoom={false} zoomControl={false} style={{height: '100%'}}>
+        <Card elevation={3} className="mapToggle">
+          <FormControlLabel
+            control={
+                <Switch checked={flockMapOn} onChange={handleFlockToggle} name="FlockMap" />
+            }
+            slotProps={{
+                typography: { sx: { fontWeight: flockMapOn ? 'bold' : 'unset' } }
+            }}
+            label={language === 'EN' ? flockMapOn ? 'Flock Camera Map On' : 'Flock Camera Map Off' : flockMapOn ? 'Mapa de Cámaras Flock Activado' : 'Mapa de Cámaras Flock Desactivado'}
+        />
+        </Card>
+        <MapContainer center={[33.0093, -117.0421]} zoom={10} scrollWheelZoom={false} zoomControl={false} style={{height: '100%'}}>
             <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -66,6 +81,19 @@ export const SimpleMap = ({
                     </Popup>
                 </Marker>
             ))}
+            {flockMapOn && cameras && cameras.length && cameras.map(camera => (
+                <CircleMarker
+                    key={`cameraPin-${camera.id}`}
+                    center={[Number(camera.lat), Number(camera.lon)]}
+                    radius={4}
+                    weight={2}
+                    color='#000000'
+                    fillColor='#ff0000'
+                    fillOpacity={1}
+                    interactive={false}
+                    >
+                </CircleMarker>
+            ))}
             <ZoomControl position="bottomleft" />
             <ResizeMap center={focusedCenter} zoom={focusedZoom} trigger={[alerts, isXLarge, isLarge, isSmall, isMedium, isXSmall]} />
         </MapContainer>
@@ -74,7 +102,7 @@ export const SimpleMap = ({
             {severityTitleEN.map((item, i) => (
                 <div className="legendItem" key={i}>
                     <img src={severityIcon[i].options.iconUrl} alt="" className="legendIcon" />
-                    <Typography variant='caption' color={`${severityLevel[i]}.dark`}>{language === 'EN' ? severityTitleEN[i] : severityTitleES[i]}</Typography>
+                    <Typography variant='caption' sx={{textAlign: 'left'}} color={`${severityLevel[i]}.dark`}>{language === 'EN' ? severityTitleEN[i] : severityTitleES[i]}</Typography>
                     <Tooltip title={language === 'EN' ? severityDescriptionEN[i] : severityDescriptionES[i]}>
                         <IconButton>
                             <InfoOutlinedIcon/>
@@ -82,6 +110,15 @@ export const SimpleMap = ({
                     </Tooltip>
                 </div>
             ))}
+            <div className="legendItem" key={5}>
+                <div className="legendCameraIcon" />
+                <Typography variant='caption' sx={{textAlign: 'left'}}>{language === 'EN' ? 'Flock Camera' : 'Cámara Flock'}</Typography>
+                <Tooltip title={language === 'EN' ? 'The Flock Camera map is updated every week. The map shows Flock cameras within a 50 mile radius of the center of zipcode 92116.' : 'El mapa de cámaras Flock se actualiza cada semana. El mapa muestra las cámaras Flock situadas en un radio de 50 millas desde el centro del código postal 92116.'}>
+                    <IconButton>
+                        <InfoOutlinedIcon/>
+                    </IconButton>
+                </Tooltip>
+            </div>
         </Card>
     </div>
   );
