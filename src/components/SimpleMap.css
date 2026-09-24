@@ -1,0 +1,83 @@
+.map {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    @media (max-width: 899px) {
+        height: auto;
+        aspect-ratio: 1;
+    }
+}
+
+.mapToggle {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 1000;
+    background-color: #ffffff;
+    margin-right: 0 !important;
+    padding: 4px 0 4px 12px;
+}
+
+.mapToggleLoading {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px 8px 0;
+}
+
+.mapLegend {
+    position: absolute;
+    bottom: 24px;
+    right: 12px;
+    z-index: 1000;
+    padding: 12px;
+    @media (max-width: 899px) {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        position: unset;
+        margin-top: 12px;
+    }
+}
+
+.smallMapLegend {
+    display: flex;
+    flex-direction: column;
+    width: stretch;
+    padding: 12px;
+}
+
+.smallLegendList {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    @media (max-width: 599px) {
+        flex-direction: column;
+    }
+}
+
+.mapLegend h4 {
+    margin: 0 0 8px 0;
+}
+
+.legendItem {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    @media (max-width: 599px) {
+       margin-bottom: 0;
+    }
+}
+
+.legendIcon {
+    width: 16px;
+}
+
+.legendCameraIcon {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #7a7a7a;
+    border: 4px solid #000000
+}
