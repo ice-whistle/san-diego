@@ -11,7 +11,6 @@ export const SimpleMap = ({
     alerts,
     cameras,
     camerasLoading,
-    cameraError,
     focusedCenter,
     focusedZoom,
     handleClickAlert}) =>{
@@ -41,9 +40,9 @@ export const SimpleMap = ({
     
   return (
     <div className='map'>
-        {!cameraError && <Card elevation={3} className="mapToggle">
+        {cameras !== 'Error' && <Card elevation={3} className="mapToggle">
             {camerasLoading && <div className='mapToggleLoading'><Typography variant='body1'>{language === 'EN' ? 'Loading Flock Camera Map...' : 'Cargando el mapa de cámaras Flock...'}</Typography><CircularProgress /></div>}
-            {!camerasLoading && cameras && cameras.length &&
+            {!camerasLoading && cameras?.length &&
             <FormControlLabel
                 control={<Switch checked={flockMapOn} onChange={handleFlockToggle} name="FlockMap" />}
                 slotProps={{typography: { sx: { fontWeight: flockMapOn ? 'bold' : 'unset' }}}}
@@ -74,7 +73,7 @@ export const SimpleMap = ({
                     </Popup>
                 </Marker>
             ))}
-            {flockMapOn && cameras && cameras.length && cameras.map(camera => (
+            {flockMapOn && cameras?.length && cameras !== 'Error' && cameras.map(camera => (
                 <CircleMarker
                     key={`cameraPin-${camera.id}`}
                     center={[Number(camera.lat), Number(camera.lon)]}
@@ -103,7 +102,7 @@ export const SimpleMap = ({
                     </Tooltip>
                 </div>
             ))}
-            {!cameraError && <div className="legendItem" key={5}>
+            {cameras !== 'Error' && <div className="legendItem" key={5}>
                 <div className="legendCameraIcon" />
                 <Typography variant='caption' sx={{textAlign: 'left'}}>{language === 'EN' ? 'Flock Camera' : 'Cámara Flock'}</Typography>
                 <Tooltip title={language === 'EN' ? 'The Flock Camera map is updated every week. The map shows Flock cameras within a 50 mile radius of the center of zipcode 92116.' : 'El mapa de cámaras Flock se actualiza cada semana. El mapa muestra las cámaras Flock situadas en un radio de 50 millas desde el centro del código postal 92116.'}>

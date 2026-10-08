@@ -24,7 +24,6 @@ export const LiveMap = ({
 
   const { isXSmall, isSmall } = useScreenResolution();
   const mapRef = useRef(null);
-  const [cameraError, setCameraError] = useState(false);
 
   const handleClickAlert = (alert) => {
     if ((isXSmall || isSmall) && mapRef.current) {
@@ -34,12 +33,6 @@ export const LiveMap = ({
     setFocusedZoom(12);
     setFocusedAlertId(alert.id);
   };
-
-  useEffect(() => {
-      if (!camerasLoading && (cameras === 'Error' || !cameras || cameras.length === 0)) {
-          setCameraError(true);
-      }
-  }, [camerasLoading, cameras]);
     
   return (
     <div className='pageContainer'>
@@ -52,7 +45,7 @@ export const LiveMap = ({
                   'Esta es una lista de avistamientos de ICE reportados por la comunidad en el área metropolitana de San Diego durante los últimos 7 días. Tenga en cuenta que esta no es una lista exhaustiva y que puede haber más avistamientos que no han sido reportados. Los datos sobre los avistamientos provienen de StopICE.net. El mapa de cámaras Flock muestra una lista de cámaras Flock obtenida a través de la API Overpass.'}
               </Typography>
           </Alert>
-          {cameraError && <Alert variant='filled' severity='warning'>
+          {cameras === 'Error' && <Alert variant='filled' severity='warning'>
               <Typography variant='subtitle2' sx={{display: 'flex', textAlign: 'left'}}>
               {language === 'EN' ?
                   'The Flock Camera Map is not loading. Please try again later.':
@@ -72,7 +65,6 @@ export const LiveMap = ({
                 language={language}
                 alerts={alerts}
                 cameras={cameras}
-                cameraError={cameraError}
                 camerasLoading={camerasLoading}
                 focusedCenter={focusedCenter}
                 focusedZoom={focusedZoom}
@@ -87,7 +79,6 @@ export const LiveMap = ({
                 alerts={alerts}
                 cameras={cameras}
                 camerasLoading={camerasLoading}
-                cameraError={cameraError}
                 focusedCenter={focusedCenter}
                 focusedZoom={focusedZoom}
                 handleClickAlert={handleClickAlert}/>
