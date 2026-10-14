@@ -123,7 +123,7 @@ export const AnalyzingData = ({}) => {
   if (passwordResponse === 'NeedsToSubmitPassword' || passwordResponse === 'Error')
     return (
         <div className="analyzingData-pageContainer">
-            <Typography variant="h4">Analyzing alerts</Typography>
+            <Typography variant="h4">Analyzing data</Typography>
             <div className="analyzingData-passwordContainer">
                 <CardContent className='analyzingData-passwordCardContent'>
                     <TextField
@@ -147,7 +147,7 @@ export const AnalyzingData = ({}) => {
   if (analysisAlertsError && passwordResponse === 'Success')
     return (
         <div className="analyzingData-pageContainer">
-            <Typography variant="h4">Analyzing alerts</Typography>
+            <Typography variant="h4">Analyzing data</Typography>
             <Typography variant="body1">An error occurred. Please try again later.</Typography>
         </div>
     );
@@ -155,7 +155,7 @@ export const AnalyzingData = ({}) => {
   if ((!analysisAlerts || analysisAlertsLoading) && passwordResponse === 'Success')
     return (
     <div className="analyzingData-pageContainer">
-        <Typography variant="h4">Analyzing alerts</Typography>
+        <Typography variant="h4">Analyzing data</Typography>
         <div className="analyzingData-loading">
             <CircularProgress />
         </div>
@@ -165,7 +165,7 @@ export const AnalyzingData = ({}) => {
     if (passwordResponse === 'Success' && !analysisAlertsLoading && analysisAlerts)
         return (
             <div className="analyzingData-pageContainer">
-                <Typography variant="h4">Analyzing alerts</Typography>
+                <Typography variant="h4">Analyzing data</Typography>
                 <Typography variant="h5">ICE Sightings by Time of Day</Typography>
                 <Alert variant='filled' severity='info'>
                     <Typography variant='subtitle2' sx={{display: 'flex', textAlign: 'left', whiteSpace: 'pre-wrap'}}>
