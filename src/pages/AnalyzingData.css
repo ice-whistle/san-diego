@@ -31,3 +31,11 @@
         width: stretch;
     }
 }
+
+.analyzingData-alertAndFilter {
+    display: flex;
+    flex-direction: row;
+    width: stretch;
+    justify-content: space-between;
+    gap: 24px;
+}
