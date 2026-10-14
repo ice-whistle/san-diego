@@ -16,9 +16,11 @@
     "@testing-library/user-event": "^13.5.0",
     "jsonrepair": "^3.13.2",
     "leaflet": "^1.9.4",
+    "plotly.js-cartesian-dist-min": "^4.1.2",
     "react": "^19.0.0-rc.1",
     "react-dom": "^19.0.0-rc.1",
     "react-leaflet": "^5.0.0-rc.2",
+    "react-plotly.js": "^4.1.0",
     "react-router-dom": "^7.13.2",
     "web-vitals": "^2.1.4"
   },
@@ -29,7 +31,8 @@
     "deploy": "gh-pages -d dist",
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "fetch-alerts": "node scripts/fetchAlerts.mjs"
   },
   "eslintConfig": {
     "extends": [

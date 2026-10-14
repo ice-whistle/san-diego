@@ -4,7 +4,7 @@ import { NavBar } from './components/NavBar.jsx';
 import { YourRights } from './pages/YourRights.jsx';
 import { LiveMap } from './pages/LiveMap.jsx';
 import { Resources } from './pages/Resources.jsx';
-import { getAlertsEveryHour, getCameraAPIResponse, getfilteredAlertAPIResponse } from './utils/getAPIResults';
+import { getCameraAPIResponse, getfilteredAlertAPIResponse } from './utils/getAPIResults';
 import { Footer } from './components/Footer.jsx';
 import { Posters } from './pages/Posters.jsx';
 import { IdentifyingICEVehicles } from './pages/IdentifyingICEVehicles.jsx';
@@ -16,6 +16,7 @@ import { Fab } from '@mui/material';
 import { Visibility } from '@mui/icons-material';
 import { useScreenResolution } from './utils/ScreenSize.tsx';
 import { SafetyAtWork } from './pages/SafetyAtWork.jsx';
+import { AnalyzingData } from './pages/AnalyzingData.jsx';
 
 function App() {
   const [language, setLanguage] = useState('EN');
@@ -38,8 +39,6 @@ function App() {
     getfilteredAlertAPIResponse(setAlerts, setAlertsLoading);
     getCameraAPIResponse(setCameras, setCamerasLoading);
   }, []);
-
-  // getAlertsEveryHour(setAlerts, setAlertsLoading);
 
   return (
     <div className="App">
@@ -106,6 +105,7 @@ function App() {
             setFocusedCenter={setFocusedCenter}
             setFocusedZoom={setFocusedZoom}
             setFocusedAlertId={setFocusedAlertId}/>} />
+          <Route path="/analyzing-data" element={<AnalyzingData/>} />
         </Routes>
         <Fab variant={isMobile ? 'circular' : 'extended'} color="primary" aria-label="add" className='createNewSighting' onClick={()=>{setModal('reportSighting');}}>
           <Visibility sx={{ mr: {sm: 0, md: 1} }}/>

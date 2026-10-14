@@ -1,7 +1,7 @@
 import { jsonrepair } from "jsonrepair";
 
 export function formatDate(unformattedDate) {
-  const dateStr = unformattedDate.split(" (")[0]; // remove time
+  const dateStr = unformattedDate.split(" (")[0];
   const formattedDate = new Date(dateStr);
   const month = formattedDate.toLocaleString('default', { month: 'long' });
   const day = String(formattedDate.getDate());
@@ -17,7 +17,7 @@ export function getAlertsWithinWeek(obj) {
     .filter(key => key.startsWith("DATASET-ALERT"))
     .flatMap(key => obj[key])
     .filter(alert => {
-      const dateStr = alert.created.split(" (")[0]; // remove time
+      const dateStr = alert.created.split(" (")[0];
       const alertDate = new Date(dateStr);
       return alertDate >= oneWeekAgo && alertDate <= today;
     });
@@ -127,10 +127,4 @@ export function getCameraAPIResponse(setCameras, setCamerasLoading) {
   };
 
   runRequest();
-}
-
-export function getAlertsEveryHour(setAlerts, setAlertsLoading) {
-  setInterval(()=> {
-    getfilteredAlertAPIResponse(setAlerts, setAlertsLoading);
-  }, 3600000);
 }
