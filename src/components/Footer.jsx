@@ -23,8 +23,8 @@ export const Footer = ({language}) =>{
                 </div>
                 <Typography variant='subtitle2' sx={{textAlign: 'left', color: 'white', whiteSpace: 'nowrap'}}>
                     {language === 'EN' ?
-                        'Version 3.2.2':
-                        'Versión 3.2.2'}
+                        'Version 3.2.3':
+                        'Versión 3.2.3'}
                 </Typography>
             </div>            
         </Box>
